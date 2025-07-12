@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>J.J. I.A. Obras Literárias e Artigos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          background-color: #1a1a1a;
+          background-image:
+            radial-gradient(ellipse at 75% 25%, #2a1a1f 0%, transparent 50%),
+            radial-gradient(ellipse at 25% 75%, #1f282c 0%, transparent 50%);
+      }
+      .bookshelf-bg {
+        background-color: #4d3a30;
+        background-image: 
+            repeating-linear-gradient(90deg, hsla(0,0%,100%,.05) 0, hsla(0,0%,100%,.05) 1px, transparent 1px, transparent 60px),
+            repeating-linear-gradient(180deg, hsla(0,0%,100%,.05) 0, hsla(0,0%,100%,.05) 1px, transparent 1px, transparent 60px),
+            linear-gradient(135deg, #5f4a40 0%, #3f2a20 100%);
+        border: 2px solid #2c1e18;
+        box-shadow: inset 0 0 50px rgba(0,0,0,0.6);
+      }
+      .scrollbar-thin::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-track {
+        background: #4a3a32;
+        border-radius: 4px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-thumb {
+        background-color: #8c6f62;
+        border-radius: 4px;
+        border: 2px solid #4a3a32;
+      }
+
+      .spotlight {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        width: 150px;
+        height: 150px;
+        transform: translateX(-50%) rotateX(60deg);
+        background: radial-gradient(ellipse at center, rgba(253, 230, 138, 0.4) 0%, rgba(253, 230, 138, 0) 70%);
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        pointer-events: none;
+        z-index: 10;
+      }
+      .group:hover .spotlight {
+        opacity: 0.7;
+        transform: translateX(-50%) rotateX(50deg) translateY(-10px);
+      }
+      
+      .book-card {
+        aspect-ratio: 3 / 4;
+        perspective: 1500px;
+        transition: transform 0.2s ease-out;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        position: relative;
+        z-index: 20;
+      }
+      .book-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px 2px 2px 4px; /* Book edge shape */
+        overflow: hidden;
+        transform: rotateY(-5deg) rotateX(2deg) translateZ(0);
+        box-shadow: 
+          -10px 10px 25px rgba(0,0,0,0.4),
+          inset -1px 1px 2px rgba(255,255,255,0.1),
+          inset 2px -2px 2px rgba(0,0,0,0.2);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        background-color: #1a1a1a;
+      }
+      .group:hover .book-card-inner {
+        transform: rotateY(0) rotateX(0) translateY(-12px) scale(1.05);
+        box-shadow: 
+          -2px 20px 35px rgba(0,0,0,0.3),
+          inset -1px 1px 2px rgba(255,255,255,0.15),
+          inset 2px -2px 2px rgba(0,0,0,0.2);
+      }
+      .book-card.selected .book-card-inner {
+        transform: rotateY(0) rotateX(0) translateY(-12px) scale(1.05);
+        box-shadow: 0 0 0 3px #38bdf8, 0 8px 25px rgba(56, 189, 248, 0.3);
+      }
+      
+      .book-selection-overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgb(56 189 248 / 0.6);
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+      }
+      
+      .book-info-plate {
+          text-align: center;
+          margin-top: 16px;
+          padding: 6px 8px;
+          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+          opacity: 0.85;
+          transform-origin: top center;
+      }
+      .group:hover .book-info-plate {
+          opacity: 1;
+          transform: translateY(-8px);
+      }
+      .two-line-truncate {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* Brainstorming Map Styles */
+      .map-connector {
+        position: absolute;
+        border-color: #52525b; /* zinc-600 */
+        border-style: dashed;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.9.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="text-stone-300">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
